@@ -1,0 +1,25 @@
+VIDEO HERO — 31.10 Art Hotel (versione Grand)
+=============================================
+
+L'hero della home ora usa un video di sfondo. Metti qui il file:
+
+  • intro-firenze.mp4   (consigliato per il web — H.264, funziona su tutti i browser)
+  e/o
+  • intro-firenze.mov   (il file originale; funziona su Safari e Chrome su Mac)
+
+L'HTML cerca in quest'ordine: prima intro-firenze.mp4, poi intro-firenze.mov.
+Finché il file non è presente, l'hero mostra la foto di riposo (poster) — nessun errore.
+
+COME FARE ADESSO (veloce):
+1. Copia il tuo "intro firenze.mov" in questa cartella.
+2. Rinominalo in "intro-firenze.mov" (senza spazi).
+3. Ricarica la home con Cmd+Shift+R.
+
+PER LA PRODUZIONE (consigliato):
+Converti il .mov in .mp4 H.264 (es. con HandBrake o ffmpeg) e chiamalo
+"intro-firenze.mp4", così parte veloce ovunque. Tienilo sotto i ~6-8 MB:
+peso contenuto = caricamento più rapido (Core Web Vitals).
+
+Comando ffmpeg di riferimento:
+  ffmpeg -i "intro firenze.mov" -vf "scale=-2:1080" -c:v libx264 -crf 26 \
+    -preset veryfast -movflags +faststart -c:a aac -b:a 128k intro-firenze.mp4
