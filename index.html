@@ -79,12 +79,12 @@
 <!-- BOOKING BAR -->
 <div class="booking" id="booking">
   <div class="wrap">
-    <div class="booking__box">
-      <div class="bk"><label>Arrivo</label><span class="val"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4.5" width="18" height="17" rx="2"/><path d="M3 9h18M8 2.5v4M16 2.5v4"/></svg>Ven 14 Ago</span></div>
-      <div class="bk"><label>Partenza</label><span class="val"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4.5" width="18" height="17" rx="2"/><path d="M3 9h18M8 2.5v4M16 2.5v4"/></svg>Dom 16 Ago</span></div>
-      <div class="bk"><label>Ospiti</label><span class="val"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6"/></svg>2 adulti</span></div>
-      <a class="btn btn--gold" href="#">Verifica disponibilità</a>
-    </div>
+    <form class="booking__box" id="bookForm" novalidate>
+      <div class="bk"><label for="bkIn">Arrivo</label><span class="val"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4.5" width="18" height="17" rx="2"/><path d="M3 9h18M8 2.5v4M16 2.5v4"/></svg><input type="date" id="bkIn" name="checkin" required></span></div>
+      <div class="bk"><label for="bkOut">Partenza</label><span class="val"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4.5" width="18" height="17" rx="2"/><path d="M3 9h18M8 2.5v4M16 2.5v4"/></svg><input type="date" id="bkOut" name="checkout" required></span></div>
+      <div class="bk"><label for="bkGuests">Ospiti</label><span class="val"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6"/></svg><select id="bkGuests" name="adults"><option value="1">1 adulto</option><option value="2" selected>2 adulti</option><option value="3">3 adulti</option><option value="4">4 adulti</option><option value="5">5 adulti</option></select></span></div>
+      <button class="btn btn--gold" type="submit">Verifica disponibilità</button>
+    </form>
     <p class="booking__note">Prenota dal sito ufficiale: <strong>miglior tariffa garantita</strong> · conferma immediata</p>
   </div>
 </div>
@@ -106,7 +106,7 @@
 <section class="section">
   <div class="wrap split">
     <div class="figure reveal">
-      <img src="https://www.3110arthotelfirenze.it/wp-content/uploads/2018/09/Albergo_via_fra_bartolomeo_firenze-27_art_hotel_firenze_3stelle.jpg" alt="Camera raffinata del 31.10 Art Hotel">
+      <img src="assets/img/_1730408.jpg" alt="La reception del 31.10 Art Hotel con arco in pietra e parete dipinta" style="object-position:55% 50%">
       <div class="figure__badge"><span>Dal</span>31 · 10 · 1737</div>
     </div>
     <div class="stack reveal" data-d="1">
@@ -123,54 +123,33 @@
 <!-- ROOMS -->
 <section class="section section--tint" id="rooms">
   <div class="wrap">
-    <div class="center reveal" style="max-width:640px;margin-inline:auto;margin-bottom:52px">
+    <div class="shead reveal">
       <span class="eyebrow">Camere</span>
       <h2>Raffinatezza in ogni stanza</h2>
       <hr class="rule">
-      <p>Tredici camere dove classico e contemporaneo si fondono in un equilibrio perfetto.</p>
+      <p>Tredici camere tra Standard e Deluxe d'Autore, dove classico e contemporaneo si incontrano.</p>
     </div>
-    <div class="rooms">
+    <div class="rooms rooms--2">
       <article class="rcard reveal">
-        <div class="rcard__media"><img src="https://www.3110arthotelfirenze.it/wp-content/uploads/2018/09/Albergo_via_fra_bartolomeo_firenze-1_art_hotel_firenze_3stelle.jpg" alt="Camera Superior"></div>
+        <div class="rcard__media"><img src="assets/img/camera-standard-01.jpg" alt="Camera Standard del 31.10 Art Hotel"></div>
         <div class="rcard__body">
-          <span class="rcard__k">Comfort superiore</span><h3 class="rcard__t">Camera Superior</h3>
-          <p class="rcard__x">Ambienti ampi e luminosi con finiture di pregio, per un soggiorno all'insegna del relax.</p>
-          <div class="rcard__am" aria-label="Servizi">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" title="Wi-Fi"><path d="M5 12.5a10 10 0 0 1 14 0M8 15.5a6 6 0 0 1 8 0M12 19h.01"/></svg>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" title="Colazione"><path d="M4 8h13v4a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M17 9h2a2 2 0 0 1 0 4h-2"/></svg>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" title="Climatizzazione"><path d="M12 3v18M3 12h18M6 6l12 12M18 6L6 18"/></svg>
-          </div>
-          <div class="rcard__foot"><span class="rcard__price">da <b>€180</b>/notte</span><a class="tlink" href="camere.html">Dettagli</a></div>
+          <span class="rcard__k">Comfort classico</span><h3 class="rcard__t">Camera Standard</h3>
+          <p class="rcard__x">Luminose e accoglienti, con testiera in velluto, parquet a spina di pesce e tutti i comfort per vivere Firenze in tranquillità.</p>
+          <div class="rcard__am" aria-label="Servizi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 12.5a10 10 0 0 1 14 0M8 15.5a6 6 0 0 1 8 0M12 19h.01"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 8h13v4a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M17 9h2a2 2 0 0 1 0 4h-2"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3v18M3 12h18M6 6l12 12M18 6L6 18"/></svg></div>
+          <div class="rcard__foot"><span class="rcard__price">Miglior tariffa sul sito</span><a class="tlink" href="camere.html">Dettagli</a></div>
         </div>
       </article>
       <article class="rcard reveal" data-d="1">
-        <div class="rcard__media"><img src="https://www.3110arthotelfirenze.it/wp-content/uploads/2018/09/Albergo_via_fra_bartolomeo_firenze-35_art_hotel_firenze_3stelle.jpg" alt="Deluxe tematica"></div>
+        <div class="rcard__media"><img src="assets/img/camera-anna-maria-luisa-01.jpg" alt="Camera Deluxe tematica Anna Maria Luisa de' Medici"></div>
         <div class="rcard__body">
           <span class="rcard__k">Camere tematiche</span><h3 class="rcard__t">Deluxe d'Autore</h3>
-          <p class="rcard__x">Quattro camere dedicate ai maestri fiorentini: un soggiorno immerso nell'arte e nella storia.</p>
-          <div class="rcard__am" aria-label="Servizi">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 12.5a10 10 0 0 1 14 0M8 15.5a6 6 0 0 1 8 0M12 19h.01"/></svg>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 8h13v4a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M17 9h2a2 2 0 0 1 0 4h-2"/></svg>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/></svg>
-          </div>
-          <div class="rcard__foot"><span class="rcard__price">da <b>€240</b>/notte</span><a class="tlink" href="camere.html">Dettagli</a></div>
-        </div>
-      </article>
-      <article class="rcard reveal" data-d="2">
-        <div class="rcard__media"><img src="https://www.3110arthotelfirenze.it/wp-content/uploads/2018/09/Junior-Suite-Fratelli-Alinari.jpg" alt="Deluxe"></div>
-        <div class="rcard__body">
-          <span class="rcard__k">Spazio &amp; famiglia</span><h3 class="rcard__t">Familiari comunicanti</h3>
-          <p class="rcard__x">Ambienti comunicanti fino a 5 ospiti, ideali per famiglie che non rinunciano allo stile.</p>
-          <div class="rcard__am" aria-label="Servizi">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 12.5a10 10 0 0 1 14 0M8 15.5a6 6 0 0 1 8 0M12 19h.01"/></svg>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6"/></svg>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 8h13v4a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M17 9h2a2 2 0 0 1 0 4h-2"/></svg>
-          </div>
-          <div class="rcard__foot"><span class="rcard__price">da <b>€260</b>/notte</span><a class="tlink" href="camere.html">Dettagli</a></div>
+          <p class="rcard__x">Quattro camere dedicate ai maestri fiorentini: velluti, ottoni e opere d'arte per un soggiorno immerso nella storia di Firenze.</p>
+          <div class="rcard__am" aria-label="Servizi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M5 12.5a10 10 0 0 1 14 0M8 15.5a6 6 0 0 1 8 0M12 19h.01"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 8h13v4a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M17 9h2a2 2 0 0 1 0 4h-2"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="M7 16l3-4 3 3 2-2 3 3"/></svg></div>
+          <div class="rcard__foot"><span class="rcard__price">Miglior tariffa sul sito</span><a class="tlink" href="camere.html">Dettagli</a></div>
         </div>
       </article>
     </div>
-    <div class="center reveal" style="margin-top:48px"><a class="btn btn--outline" href="camere.html">Tutte le camere</a></div>
+    <div class="center reveal" style="margin-top:32px"><a class="btn btn--outline" href="camere.html">Tutte le camere</a></div>
   </div>
 </section>
 
@@ -178,10 +157,17 @@
 <section class="g3d" aria-label="La Galleria delle Camere">
   <div class="g3d__sticky">
     <div class="g3d__scene">
+      <div class="g3d__ceil"></div>
+      <div class="g3d__wall g3d__wall--l"></div>
+      <div class="g3d__wall g3d__wall--r"></div>
       <div class="g3d__floor"></div>
+      <div class="g3d__end"><span></span></div>
+      <span class="g3d__bust g3d__bust--r" style="--z:-1150px"><svg viewBox="0 0 120 320" aria-hidden="true"><path fill="#cfc7b8" d="M60 10c14 0 23 12 23 27 0 6-1 10-3 14l5 6-5 3c0 6-4 10-9 11l-1 8c16 3 32 11 37 25 3 8 2 15-2 19H15c-4-4-5-11-2-19 5-14 21-22 37-25l-1-8c-9-3-15-12-15-25C34 22 46 10 60 10z"/><path fill="#ece6da" d="M60 14c11 0 18 10 18 23 0 6-2 11-4 15l4 5-4 2c0 5-3 8-8 9l-2 12c13 3 26 9 31 20 2 6 2 11-1 14H22c-3-3-3-8-1-14 5-11 18-17 31-20l-2-12c-8-3-12-11-12-22 0-18 10-32 22-32z"/><rect fill="#bdb4a3" x="28" y="110" width="64" height="12"/><rect fill="#e2dccf" x="38" y="122" width="44" height="168"/><rect fill="#cfc7b8" x="38" y="122" width="8" height="168"/><rect fill="#bdb4a3" x="26" y="290" width="68" height="22"/></svg></span>
+      <span class="g3d__bust g3d__bust--l" style="--z:-2150px"><svg viewBox="0 0 120 320" aria-hidden="true"><path fill="#cfc7b8" d="M60 10c14 0 23 12 23 27 0 6-1 10-3 14l5 6-5 3c0 6-4 10-9 11l-1 8c16 3 32 11 37 25 3 8 2 15-2 19H15c-4-4-5-11-2-19 5-14 21-22 37-25l-1-8c-9-3-15-12-15-25C34 22 46 10 60 10z"/><path fill="#ece6da" d="M60 14c11 0 18 10 18 23 0 6-2 11-4 15l4 5-4 2c0 5-3 8-8 9l-2 12c13 3 26 9 31 20 2 6 2 11-1 14H22c-3-3-3-8-1-14 5-11 18-17 31-20l-2-12c-8-3-12-11-12-22 0-18 10-32 22-32z"/><rect fill="#bdb4a3" x="28" y="110" width="64" height="12"/><rect fill="#e2dccf" x="38" y="122" width="44" height="168"/><rect fill="#cfc7b8" x="38" y="122" width="8" height="168"/><rect fill="#bdb4a3" x="26" y="290" width="68" height="22"/></svg></span>
+      <span class="g3d__bust g3d__bust--r" style="--z:-3050px"><svg viewBox="0 0 120 320" aria-hidden="true"><path fill="#cfc7b8" d="M60 10c14 0 23 12 23 27 0 6-1 10-3 14l5 6-5 3c0 6-4 10-9 11l-1 8c16 3 32 11 37 25 3 8 2 15-2 19H15c-4-4-5-11-2-19 5-14 21-22 37-25l-1-8c-9-3-15-12-15-25C34 22 46 10 60 10z"/><path fill="#ece6da" d="M60 14c11 0 18 10 18 23 0 6-2 11-4 15l4 5-4 2c0 5-3 8-8 9l-2 12c13 3 26 9 31 20 2 6 2 11-1 14H22c-3-3-3-8-1-14 5-11 18-17 31-20l-2-12c-8-3-12-11-12-22 0-18 10-32 22-32z"/><rect fill="#bdb4a3" x="28" y="110" width="64" height="12"/><rect fill="#e2dccf" x="38" y="122" width="44" height="168"/><rect fill="#cfc7b8" x="38" y="122" width="8" height="168"/><rect fill="#bdb4a3" x="26" y="290" width="68" height="22"/></svg></span>
       <a class="g3d__art g3d__art--l" style="--z:-800px" href="camera-alinari.html">
         <span class="g3d__glow"></span>
-        <span class="g3d__frame"><img src="https://www.3110arthotelfirenze.it/wp-content/uploads/2018/09/Junior-Suite-Fratelli-Alinari.jpg" alt="Camera Fratelli Alinari" loading="lazy"></span>
+        <span class="g3d__frame"><img src="assets/img/camera-fratelli-alinari-01.jpg" alt="Camera Fratelli Alinari" loading="lazy"></span>
         <span class="g3d__label"><b>Fratelli Alinari</b><i>Deluxe</i></span>
       </a>
       <a class="g3d__art g3d__art--r" style="--z:-1700px" href="camera-leonardo.html">
@@ -191,12 +177,12 @@
       </a>
       <a class="g3d__art g3d__art--l" style="--z:-2600px" href="camera-anna-maria-luisa.html">
         <span class="g3d__glow"></span>
-        <span class="g3d__frame"><img src="https://www.3110arthotelfirenze.it/wp-content/uploads/2018/09/Albergo_via_fra_bartolomeo_firenze-35_art_hotel_firenze_3stelle.jpg" alt="Deluxe Anna Maria Luisa de' Medici" loading="lazy"></span>
+        <span class="g3d__frame"><img src="assets/img/camera-anna-maria-luisa-01.jpg" alt="Deluxe Anna Maria Luisa de' Medici" loading="lazy"></span>
         <span class="g3d__label"><b>Anna Maria Luisa</b><i>Deluxe</i></span>
       </a>
       <a class="g3d__art g3d__art--r" style="--z:-3500px" href="camera-piero.html">
         <span class="g3d__glow"></span>
-        <span class="g3d__frame"><img src="https://www.3110arthotelfirenze.it/wp-content/uploads/2018/09/Albergo_via_fra_bartolomeo_firenze-25_art_hotel_firenze_3stelle.jpg" alt="Deluxe Piero della Francesca" loading="lazy"></span>
+        <span class="g3d__frame"><img src="assets/img/camera-piero-della-francesca-01.jpg" alt="Deluxe Piero della Francesca" loading="lazy"></span>
         <span class="g3d__label"><b>Piero della Francesca</b><i>Deluxe</i></span>
       </a>
     </div>
@@ -204,19 +190,19 @@
     <div class="g3d__intro">
       <div>
         <span class="eyebrow">La Galleria delle Camere</span>
-        <h2>Attraversate il museo</h2>
-        <p>Quattro camere, quattro maestri che hanno reso Firenze immortale. Scorrete per camminare lungo la galleria.</p>
+        <h2>Un corridoio d'arte,<br>come agli Uffizi</h2>
+        <p>Pietra serena, volte affrescate e cornici dorate: scorrete e passeggiate tra le quattro camere dedicate ai maestri che hanno reso Firenze immortale.</p>
         <span class="g3d__hint">Scorri ↓</span>
       </div>
     </div>
-    <div class="g3d__cta"><a class="btn btn--light" href="camere.html">Scopri tutte le camere</a></div>
+    <div class="g3d__cta"><a class="btn btn--gold" href="camere.html">Scopri tutte le camere</a></div>
   </div>
 </section>
 
 <!-- AMENITIES -->
 <section class="section section--navy">
   <div class="wrap">
-    <div class="center reveal" style="max-width:640px;margin-inline:auto;margin-bottom:56px">
+    <div class="shead reveal">
       <span class="eyebrow">Comfort &amp; servizi inclusi</span>
       <h2>Attenzioni che fanno la differenza</h2>
       <hr class="rule">
@@ -230,10 +216,36 @@
   </div>
 </section>
 
+<!-- COLAZIONE -->
+<section class="section section--tint" id="colazione">
+  <div class="wrap split">
+    <div class="figure reveal">
+      <img src="assets/img/colazione-01.jpg" alt="Sala colazioni del 31.10 Art Hotel con carta da parati botanica" loading="lazy">
+      <div class="figure__badge"><span>Ogni mattina</span>7:30 · 10:30</div>
+    </div>
+    <div class="stack reveal" data-d="1">
+      <span class="eyebrow">La Colazione</span>
+      <h2>Il buongiorno<br>è un'opera d'arte</h2>
+      <hr class="rule">
+      <p>Frutta fresca tagliata al momento, spremute, pasticceria del mattino e specialità toscane: la colazione del 31.10 è un piccolo rito da gustare con calma, prima di uscire alla scoperta di Firenze.</p>
+      <p>Un cappuccino nella tazza firmata 31.10, il profumo dei croissant e un'atmosfera raccolta, dove ogni dettaglio è curato come in una galleria d'arte.</p>
+      <p><a class="tlink" href="gallery.html">Guarda le foto della colazione</a></p>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="pstrip">
+      <div class="masonry__item reveal" data-lightbox="assets/img/colazione-04.jpg" data-caption="Frutta fresca"><img src="assets/img/colazione-04.jpg" alt="Frutta fresca tagliata al momento" loading="lazy"></div>
+      <div class="masonry__item reveal" data-d="1" data-lightbox="assets/img/colazione-03.jpg" data-caption="Il cappuccino del 31.10"><img src="assets/img/colazione-03.jpg" alt="Cappuccino nella tazza firmata 31.10" loading="lazy"></div>
+      <div class="masonry__item reveal" data-d="2" data-lightbox="assets/img/colazione-10.jpg" data-caption="Pasticceria del mattino"><img src="assets/img/colazione-10.jpg" alt="Pasticcini alla frutta" loading="lazy"></div>
+      <div class="masonry__item reveal" data-d="3" data-lightbox="assets/img/colazione-07.jpg" data-caption="Colazione in camera"><img src="assets/img/colazione-07.jpg" alt="Vassoio della colazione in camera con croissant" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
 <!-- ESPERIENZE IN HOTEL -->
 <section class="section">
   <div class="wrap">
-    <div class="center reveal" style="max-width:660px;margin-inline:auto;margin-bottom:52px">
+    <div class="shead reveal">
       <span class="eyebrow">Esperienze in Hotel</span>
       <h2>Coccole e servizi su richiesta</h2>
       <hr class="rule">
@@ -248,6 +260,12 @@
       <div class="amen__i reveal" data-d="2"><div class="amen__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7h13v8H3z"/><path d="M16 10h3l2 2v3h-5"/><circle cx="7" cy="17" r="1.6"/><circle cx="17.5" cy="17" r="1.6"/></svg></div><h4>Transfer aeroporto/stazione</h4><p>Servizio transfer da e per l'aeroporto o la stazione, su prenotazione.</p><span class="tag">Su richiesta</span></div>
       <div class="amen__i reveal" data-d="3"><div class="amen__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M9 8V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v3M4 13h16"/></svg></div><h4>Bagagli &amp; late check-out</h4><p>Deposito bagagli gratuito e late check-out su disponibilità.</p><span class="tag">Su richiesta</span></div>
     </div>
+    <div class="pstrip" style="margin-top:44px">
+      <div class="masonry__item reveal" data-lightbox="assets/img/esperienze-01.jpg" data-caption="Aperitivo nel verde"><img src="assets/img/esperienze-01.jpg" alt="Aperitivo con vino rosso e stuzzichini" loading="lazy"></div>
+      <div class="masonry__item reveal" data-d="1" data-lightbox="assets/img/esperienze-03.jpg" data-caption="Tagliere toscano"><img src="assets/img/esperienze-03.jpg" alt="Tagliere di salumi e formaggi toscani" loading="lazy"></div>
+      <div class="masonry__item reveal" data-d="2" data-lightbox="assets/img/esperienze-05.jpg" data-caption="Un brindisi speciale"><img src="assets/img/esperienze-05.jpg" alt="Coppia che brinda in camera con rose" loading="lazy"></div>
+      <div class="masonry__item reveal" data-d="3" data-lightbox="assets/img/esperienze-04.jpg" data-caption="Vino in camera"><img src="assets/img/esperienze-04.jpg" alt="Calici di vino rosso in camera" loading="lazy"></div>
+    </div>
     <p class="center reveal" style="margin-top:32px;font-size:.9rem;color:var(--muted)">E ancora: concierge per tour e ticket, baby-sitting su richiesta e servizi negli spazi comuni. &nbsp;<a class="tlink" href="esperienze.html" style="display:inline-flex;vertical-align:middle">Tutte le esperienze</a></p>
   </div>
 </section>
@@ -255,7 +273,7 @@
 <!-- ESPERIENZE IN TOSCANA E ITALIA -->
 <section class="section section--tint">
   <div class="wrap">
-    <div class="center reveal" style="max-width:660px;margin-inline:auto;margin-bottom:52px">
+    <div class="shead reveal">
       <span class="eyebrow">Esperienze in Toscana e in Italia</span>
       <h2>Oltre le mura dell'hotel</h2>
       <hr class="rule">
