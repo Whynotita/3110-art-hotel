@@ -1,0 +1,32 @@
+/* Intro "31.10 dipinto" — scritta che si dipinge allo scroll, prima del sito.
+   Senza JS o con reduced-motion l'intro resta nascosta (il sito si apre subito). */
+#paintIntro{display:none}
+.pi-on #paintIntro{display:block;position:fixed;inset:0;z-index:400;overflow:hidden;background:#F8F5EF;touch-action:none;overscroll-behavior:contain;
+  transition:transform 1s cubic-bezier(.76,0,.24,1)}
+.pi-on{overflow:hidden}
+#paintIntro.is-open{transform:translateY(-100%)}
+#paintIntro::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.55;mix-blend-mode:multiply;
+  background:radial-gradient(ellipse 90% 75% at 50% 45%,transparent 55%,rgba(150,120,70,.22) 100%)}
+#paintIntro::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.35;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .45  0 0 0 0 .38  0 0 0 0 .28  0 0 0 .32 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+#paintIntro canvas{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1}
+.pi__top{position:absolute;z-index:3;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:22px clamp(24px,5vw,64px);
+  font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:rgba(22,32,46,.6)}
+.pi__skip{font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit;background:none;border:0;border-bottom:1px solid rgba(22,32,46,.35);padding:6px 0;cursor:pointer;transition:color .3s,border-color .3s}
+.pi__skip:hover,.pi__skip:focus-visible{color:#16202E;border-color:#9C7C3A}
+.pi__skip:focus-visible{outline:2px solid #9C7C3A;outline-offset:4px}
+.pi__cta{position:absolute;z-index:3;left:0;right:0;bottom:clamp(40px,9vh,96px);display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center;padding:0 24px;
+  opacity:0;transform:translateY(14px);transition:opacity .6s,transform .6s;pointer-events:none}
+.pi__cta.on{opacity:1;transform:none;pointer-events:auto}
+.pi__cta p{font-family:var(--display,'Playfair Display',Georgia,serif);font-style:italic;font-size:clamp(16px,1.7vw,22px);color:#4a4538;max-width:34ch;line-height:1.5;margin:0}
+.pi__btn{font:500 11px/1 var(--sans,'Montserrat',system-ui,sans-serif);letter-spacing:.28em;text-transform:uppercase;color:#F8F5EF;background:#16202E;padding:17px 38px;border:1px solid #16202E;cursor:pointer;transition:background .3s,color .3s}
+.pi__btn:hover,.pi__btn:focus-visible{background:transparent;color:#16202E}
+.pi__btn:focus-visible{outline:2px solid #9C7C3A;outline-offset:4px}
+.pi__hint{position:absolute;z-index:3;left:50%;bottom:14px;translate:-50% 0;display:flex;flex-direction:column;align-items:center;gap:6px;color:rgba(22,32,46,.55);
+  font:400 9.5px/1 var(--sans,'Montserrat',system-ui,sans-serif);letter-spacing:.3em;text-transform:uppercase;transition:opacity .4s;pointer-events:none}
+.pi__hint::after{content:"";width:1px;height:28px;background:linear-gradient(#9C7C3A,transparent);animation:pi-dr 1.8s ease-in-out infinite}
+@keyframes pi-dr{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+.pi__sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media (prefers-reduced-motion:reduce){#paintIntro{display:none!important}}
+
+#paintIntro:focus{outline:none}
