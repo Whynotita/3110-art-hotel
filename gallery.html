@@ -41,6 +41,14 @@
       <button data-filter="esperienze">Esperienze</button>
       <button data-filter="colazione">Colazione</button>
     </div>
+    <div class="filter filter--sub" id="roomFilter" hidden>
+      <button class="active" data-room="all">Tutte le camere</button>
+      <button data-room="standard">Standard</button>
+      <button data-room="leonardo">Leonardo da Vinci</button>
+      <button data-room="anna">Anna Maria Luisa</button>
+      <button data-room="piero">Piero della Francesca</button>
+      <button data-room="alinari">Fratelli Alinari</button>
+    </div>
     <div class="masonry">
       <!-- Ambienti -->
       <div class="masonry__item" data-cat="ambienti" data-lightbox="assets/img/_1730408.jpg" data-caption="Reception"><img src="assets/img/_1730408.jpg" alt="Reception con murale" loading="lazy"></div>
@@ -48,17 +56,27 @@
       <div class="masonry__item" data-cat="ambienti" data-lightbox="assets/img/_1730262.jpg" data-caption="Dettaglio del murale"><img src="assets/img/_1730262.jpg" alt="Murale con paesaggio" loading="lazy"></div>
       <div class="masonry__item" data-cat="ambienti" data-lightbox="assets/img/_1730255.jpg" data-caption="Dettaglio d'arte"><img src="assets/img/_1730255.jpg" alt="Statua putto musicante" loading="lazy"></div>
       <!-- Camere -->
-      <div class="masonry__item" data-cat="camere" data-lightbox="assets/img/camera-leonardo-da-vinci-07.jpg" data-caption="Camera Leonardo da Vinci"><img src="assets/img/camera-leonardo-da-vinci-07.jpg" alt="Camera Leonardo da Vinci" loading="lazy"></div>
-      <div class="masonry__item" data-cat="camere" data-lightbox="assets/img/camera-leonardo-da-vinci-06.jpg" data-caption="Camera Leonardo da Vinci"><img src="assets/img/camera-leonardo-da-vinci-06.jpg" alt="Letto e ritratti nella camera Leonardo da Vinci" loading="lazy"></div>
-      <div class="masonry__item" data-cat="camere" data-lightbox="assets/img/camera-leonardo-da-vinci-08.jpg" data-caption="Camera Leonardo da Vinci"><img src="assets/img/camera-leonardo-da-vinci-08.jpg" alt="Chaise longue e letto, camera Leonardo da Vinci" loading="lazy"></div>
-      <div class="masonry__item" data-cat="camere" data-lightbox="assets/img/_1707901.jpg" data-caption="Dettaglio in camera"><img src="assets/img/_1707901.jpg" alt="Lampada da comodino e carta da parati" loading="lazy"></div>
-      <div class="masonry__item" data-cat="camere" data-lightbox="assets/img/camera-piero-della-francesca-02.jpg" data-caption="Camera Piero della Francesca"><img src="assets/img/camera-piero-della-francesca-02.jpg" alt="Camera Piero della Francesca con murale d'artista" loading="lazy"></div>
-      <div class="masonry__item" data-cat="camere" data-lightbox="assets/img/camera-fratelli-alinari-01.jpg" data-caption="Camera Fratelli Alinari"><img src="assets/img/camera-fratelli-alinari-01.jpg" alt="Camera Fratelli Alinari con fotografia storica" loading="lazy"></div>
-      <div class="masonry__item" data-cat="camere" data-lightbox="assets/img/camera-anna-maria-luisa-01.jpg" data-caption="Camera Anna Maria Luisa de' Medici"><img src="assets/img/camera-anna-maria-luisa-01.jpg" alt="Camera Anna Maria Luisa de' Medici con testiera in velluto" loading="lazy"></div>
-      <div class="masonry__item" data-cat="camere" data-lightbox="assets/img/camera-piero-della-francesca-04.jpg" data-caption="Camera Piero della Francesca"><img src="assets/img/camera-piero-della-francesca-04.jpg" alt="Luce calda sul letto della camera Piero della Francesca" loading="lazy"></div>
-      <div class="masonry__item" data-cat="camere" data-lightbox="assets/img/camera-standard-01.jpg" data-caption="Camera Standard"><img src="assets/img/camera-standard-01.jpg" alt="Camera Standard con testiera in velluto grigio" loading="lazy"></div>
-      <div class="masonry__item" data-cat="camere" data-lightbox="assets/img/camera-fratelli-alinari-03.jpg" data-caption="Camera Fratelli Alinari"><img src="assets/img/camera-fratelli-alinari-03.jpg" alt="Salottino e porta d'epoca della camera Fratelli Alinari" loading="lazy"></div>
-      <div class="masonry__item" data-cat="camere" data-lightbox="assets/img/camera-standard-03.jpg" data-caption="Camera Standard"><img src="assets/img/camera-standard-03.jpg" alt="Camera Standard con parete ocra" loading="lazy"></div>
+      <div class="masonry__item" data-cat="camere" data-room="standard" data-lightbox="assets/img/sito-standard-01.jpg" data-caption="Camera Standard"><img src="assets/img/sito-standard-01.jpg" alt="Camera Standard con testiera in velluto e parete ocra" loading="lazy"></div>
+      <div class="masonry__item" data-cat="camere" data-room="standard" data-lightbox="assets/img/sito-standard-02.jpg" data-caption="Camera Standard"><img src="assets/img/sito-standard-02.jpg" alt="Camera Standard, scrivania e finestra" loading="lazy"></div>
+      <div class="masonry__item" data-cat="camere" data-room="standard" data-lightbox="assets/img/sito-standard-03.jpg" data-caption="Camera Standard"><img src="assets/img/sito-standard-03.jpg" alt="Camera Standard, armadio e ingresso" loading="lazy"></div>
+      <div class="masonry__item" data-cat="camere" data-room="standard" data-lightbox="assets/img/sito-standard-04.jpg" data-caption="Camera Standard"><img src="assets/img/sito-standard-04.jpg" alt="Camera Standard, vista d'insieme" loading="lazy"></div>
+      <div class="masonry__item" data-cat="camere" data-room="leonardo" data-lightbox="assets/img/sito-leonardo-01.jpg" data-caption="Camera Leonardo da Vinci"><img src="assets/img/sito-leonardo-01.jpg" alt="Camera Leonardo da Vinci con chaise longue" loading="lazy"></div>
+      <div class="masonry__item" data-cat="camere" data-room="leonardo" data-lightbox="assets/img/sito-leonardo-02.jpg" data-caption="Camera Leonardo da Vinci"><img src="assets/img/sito-leonardo-02.jpg" alt="Camera Leonardo da Vinci con scrivania e fiori" loading="lazy"></div>
+      <div class="masonry__item" data-cat="camere" data-room="leonardo" data-lightbox="assets/img/sito-leonardo-03.jpg" data-caption="Camera Leonardo da Vinci"><img src="assets/img/sito-leonardo-03.jpg" alt="Camera Leonardo da Vinci, chaise longue e letto" loading="lazy"></div>
+      <div class="masonry__item" data-cat="camere" data-room="leonardo" data-lightbox="assets/img/camera-leonardo-da-vinci-06.jpg" data-caption="Camera Leonardo da Vinci"><img src="assets/img/camera-leonardo-da-vinci-06.jpg" alt="Letto e ritratti nella camera Leonardo da Vinci" loading="lazy"></div>
+      <div class="masonry__item" data-cat="camere" data-room="anna" data-lightbox="assets/img/sito-anna-maria-luisa-01.jpg" data-caption="Camera Anna Maria Luisa de' Medici"><img src="assets/img/sito-anna-maria-luisa-01.jpg" alt="Camera Anna Maria Luisa de' Medici con testiera blu" loading="lazy"></div>
+      <div class="masonry__item" data-cat="camere" data-room="anna" data-lightbox="assets/img/sito-anna-maria-luisa-02.jpg" data-caption="Camera Anna Maria Luisa de' Medici"><img src="assets/img/sito-anna-maria-luisa-02.jpg" alt="Camera Anna Maria Luisa de' Medici con armadio" loading="lazy"></div>
+      <div class="masonry__item" data-cat="camere" data-room="anna" data-lightbox="assets/img/sito-anna-maria-luisa-03.jpg" data-caption="Camera Anna Maria Luisa de' Medici"><img src="assets/img/sito-anna-maria-luisa-03.jpg" alt="Camera Anna Maria Luisa de' Medici, ritratto e scrittoio" loading="lazy"></div>
+      <div class="masonry__item" data-cat="camere" data-room="piero" data-lightbox="assets/img/sito-piero-01.jpg" data-caption="Camera Piero della Francesca"><img src="assets/img/sito-piero-01.jpg" alt="Camera Piero della Francesca con murale d'artista" loading="lazy"></div>
+      <div class="masonry__item" data-cat="camere" data-room="piero" data-lightbox="assets/img/camera-piero-della-francesca-02.jpg" data-caption="Camera Piero della Francesca"><img src="assets/img/camera-piero-della-francesca-02.jpg" alt="Letto matrimoniale e parete d'artista" loading="lazy"></div>
+      <div class="masonry__item" data-cat="camere" data-room="piero" data-lightbox="assets/img/camera-piero-della-francesca-03.jpg" data-caption="Camera Piero della Francesca"><img src="assets/img/camera-piero-della-francesca-03.jpg" alt="Vista d'insieme" loading="lazy"></div>
+      <div class="masonry__item" data-cat="camere" data-room="piero" data-lightbox="assets/img/camera-piero-della-francesca-04.jpg" data-caption="Camera Piero della Francesca"><img src="assets/img/camera-piero-della-francesca-04.jpg" alt="Luce calda sul letto" loading="lazy"></div>
+      <div class="masonry__item" data-cat="camere" data-room="piero" data-lightbox="assets/img/camera-piero-della-francesca-05.jpg" data-caption="Camera Piero della Francesca"><img src="assets/img/camera-piero-della-francesca-05.jpg" alt="Dettaglio della testiera" loading="lazy"></div>
+      <div class="masonry__item" data-cat="camere" data-room="piero" data-lightbox="assets/img/camera-piero-della-francesca-06.jpg" data-caption="Camera Piero della Francesca"><img src="assets/img/camera-piero-della-francesca-06.jpg" alt="Benvenuto in camera" loading="lazy"></div>
+      <div class="masonry__item" data-cat="camere" data-room="alinari" data-lightbox="assets/img/camera-fratelli-alinari-01.jpg" data-caption="Camera Fratelli Alinari"><img src="assets/img/camera-fratelli-alinari-01.jpg" alt="Camera con fotografia storica" loading="lazy"></div>
+      <div class="masonry__item" data-cat="camere" data-room="alinari" data-lightbox="assets/img/camera-fratelli-alinari-02.jpg" data-caption="Camera Fratelli Alinari"><img src="assets/img/camera-fratelli-alinari-02.jpg" alt="Letto e fotografia storica" loading="lazy"></div>
+      <div class="masonry__item" data-cat="camere" data-room="alinari" data-lightbox="assets/img/camera-fratelli-alinari-03.jpg" data-caption="Camera Fratelli Alinari"><img src="assets/img/camera-fratelli-alinari-03.jpg" alt="Salottino e porta d'epoca" loading="lazy"></div>
+      <div class="masonry__item" data-cat="camere" data-room="alinari" data-lightbox="assets/img/camera-fratelli-alinari-04.jpg" data-caption="Camera Fratelli Alinari"><img src="assets/img/camera-fratelli-alinari-04.jpg" alt="Armadio e ingresso" loading="lazy"></div>
       <!-- Esperienze -->
       <div class="masonry__item" data-cat="esperienze" data-lightbox="assets/img/esperienze-01.jpg" data-caption="Aperitivo nel verde"><img src="assets/img/esperienze-01.jpg" alt="Aperitivo con vino rosso e stuzzichini" loading="lazy"></div>
       <div class="masonry__item" data-cat="esperienze" data-lightbox="assets/img/esperienze-02.jpg" data-caption="Un calice di Chianti"><img src="assets/img/esperienze-02.jpg" alt="Bottiglia di Chianti Classico" loading="lazy"></div>
