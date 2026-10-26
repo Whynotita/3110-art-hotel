@@ -11,21 +11,21 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/grand.css">
+<link rel="stylesheet" href="assets/css/intro-paint.css">
+<script>try{if(!sessionStorage.getItem("paintIntroSeen")&&!location.hash&&!matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.classList.add("pi-on")}catch(e){}</script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Hotel","name":"31.10 Art Hotel Firenze","url":"https://www.3110arthotelfirenze.it/","priceRange":"€€","telephone":"+39 055 5048210","email":"info@3110arthotelfirenze.com","address":{"@type":"PostalAddress","streetAddress":"Via Frà Bartolommeo 21","addressLocality":"Firenze","postalCode":"50132","addressRegion":"FI","addressCountry":"IT"},"geo":{"@type":"GeoCoordinates","latitude":43.784107,"longitude":11.263785}}
 </script>
 </head>
-<body class="intro-lock">
+<body>
 
-<!-- WOW · Intro "Vernissage" (una volta a sessione) -->
-<div class="intro" aria-hidden="true">
-  <div class="intro__panel intro__panel--top"></div>
-  <div class="intro__panel intro__panel--bot"></div>
-  <div class="intro__center">
-    <div class="intro__mark">31.10<span>.</span></div>
-    <div class="intro__sub">Art Hotel · Firenze</div>
-    <div class="intro__line"></div>
-  </div>
+<!-- Intro: 31.10 dipinto allo scroll (una volta a sessione) -->
+<div id="paintIntro" tabindex="-1" role="dialog" aria-modal="true" aria-label="Benvenuti al 31.10 Art Hotel Firenze">
+  <canvas id="piCanvas" aria-hidden="true"></canvas>
+  <span class="pi__sr">31.10 Art Hotel Firenze</span>
+  <div class="pi__top"><span>Firenze</span><button type="button" class="pi__skip">Salta intro</button></div>
+  <div class="pi__cta"><p>Un hotel che custodisce quattro storie, una per camera.</p><button type="button" class="pi__btn">Entra nel sito</button></div>
+  <div class="pi__hint">Scorri per dipingere</div>
 </div>
 
 <!-- TOPBAR -->
@@ -328,5 +328,6 @@
 </footer>
 
 <script src="assets/js/grand.js"></script>
+<script src="assets/js/intro-paint.js"></script>
 </body>
 </html>
