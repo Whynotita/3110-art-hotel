@@ -48,12 +48,35 @@
     b.addEventListener("click", function () { if (b.dataset.lang === "en") alert("Versione inglese in preparazione."); });
   });
 
-  // Booking bar: apre il motore (demo)
-  var bookBtn = document.querySelector(".booking__box .btn");
-  if (bookBtn) bookBtn.addEventListener("click", function (e) {
-    e.preventDefault();
-    window.open("https://3110arthotelfirenze.beddy.io/#/(beddy:home)?lang=it", "_blank", "noopener");
-  });
+  // Booking bar: date modificabili + apertura motore Beddy con ricerca precompilata
+  var bForm = document.getElementById("bookForm");
+  if (bForm) {
+    var bIn = document.getElementById("bkIn"), bOut = document.getElementById("bkOut"), bGuests = document.getElementById("bkGuests");
+    var iso = function (d) { return d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2); };
+    var parse = function (v) { var p = v.split("-"); return new Date(+p[0], p[1] - 1, +p[2]); };
+    var addDays = function (d, n) { var x = new Date(d); x.setDate(x.getDate() + n); return x; };
+    var today = new Date(); today.setHours(0, 0, 0, 0);
+    bIn.min = iso(today);
+    if (!bIn.value) bIn.value = iso(addDays(today, 1));
+    var syncOut = function () {
+      var minOut = addDays(parse(bIn.value || iso(today)), 1);
+      bOut.min = iso(minOut);
+      if (!bOut.value || parse(bOut.value) < minOut) bOut.value = iso(addDays(minOut, 1));
+    };
+    syncOut();
+    bIn.addEventListener("change", function () { if (bIn.value && parse(bIn.value) < today) bIn.value = iso(today); syncOut(); });
+    bOut.addEventListener("change", function () { syncOut(); });
+    [bIn, bOut].forEach(function (el) {
+      el.addEventListener("click", function () { if (el.showPicker) { try { el.showPicker(); } catch (err) {} } });
+    });
+    bForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      syncOut();
+      var search = { date_from: bIn.value, date_to: bOut.value, rooms: [{ adults: parseInt(bGuests.value, 10) || 2, children: [] }] };
+      var url = "https://3110arthotelfirenze.beddy.io/#/(beddy:home)?lang=it&search=" + encodeURIComponent(btoa(JSON.stringify(search)));
+      window.open(url, "_blank", "noopener");
+    });
+  }
 
   // Filtro gallery
   var fbtns = document.querySelectorAll(".filter button");
