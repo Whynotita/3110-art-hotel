@@ -25,7 +25,7 @@
   --sans:    "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
   --wrap: 1280px; --narrow: 820px;
-  --gutter: clamp(20px, 5vw, 64px);
+  --gutter: clamp(24px, 5vw, 64px);
   --ease: cubic-bezier(.22,.61,.36,1);
 }
 
@@ -87,7 +87,7 @@ p{color:var(--ink-dim)}
 
 /* Topbar ------------------------------------------------------------------ */
 .topbar{background:var(--navy);color:var(--cream-dim);font-size:.74rem;letter-spacing:.04em}
-.topbar__in{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:9px 0}
+.topbar__in{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:9px}
 .topbar a:hover{color:var(--gold-2)}
 .topbar__r{display:flex;align-items:center;gap:20px}
 .topbar__badge{color:var(--gold-2);letter-spacing:.12em;text-transform:uppercase;font-weight:600}
@@ -98,8 +98,8 @@ p{color:var(--ink-dim)}
 
 /* Header ------------------------------------------------------------------ */
 .hdr{position:sticky;top:0;z-index:100;background:rgba(248,245,239,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--line-2);transition:padding .4s var(--ease)}
-.nav{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:16px 0;transition:padding .4s var(--ease)}
-.hdr.slim .nav{padding:9px 0}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-block:16px;transition:padding .4s var(--ease)}
+.hdr.slim .nav{padding-block:9px}
 .brand{display:flex;align-items:baseline;gap:11px}
 .brand__mark{font-family:var(--display);font-size:1.7rem;font-weight:600;color:var(--ink);line-height:1}
 .brand__mark span{color:var(--gold)}
@@ -122,7 +122,7 @@ body.nav-open .burger span:nth-child(3){transform:translateY(-8.5px) rotate(-45d
 .hero__media{position:absolute;inset:0;z-index:0}
 .hero__media img{width:100%;height:100%;object-fit:cover}
 .hero__media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,20,28,.5),rgba(15,20,28,.35) 45%,rgba(15,20,28,.72))}
-.hero__in{position:relative;z-index:2;padding:150px 0 190px;max-width:900px}
+.hero__in{position:relative;z-index:2;padding-block:150px 190px;max-width:900px}
 .hero .eyebrow{color:var(--gold-2);margin-bottom:22px}
 .hero h1{color:var(--cream);margin-bottom:20px}
 .hero .lead{color:rgba(245,239,227,.9);max-width:600px;margin:0 auto 32px}
@@ -274,15 +274,6 @@ body.nav-open .burger span:nth-child(3){transform:translateY(-8.5px) rotate(-45d
   .wall__panel{width:min(82vw,640px);height:60vh;scroll-snap-align:center}
   .wall__panel--intro{height:auto}
   .restore__aged{display:none}
-  .g3d{height:auto;background:#ece3d1}
-  .g3d__sticky{position:static;height:auto;overflow:visible;perspective:none;background:none;padding-block:80px}
-  .g3d__scene{position:static;transform:none!important;display:grid;grid-template-columns:repeat(2,1fr);gap:24px;padding-inline:var(--gutter)}
-  .g3d__floor,.g3d__vignette,.g3d__glow,.g3d__wall,.g3d__ceil,.g3d__end,.g3d__bust{display:none}
-  .g3d__intro{position:static;display:block;text-align:center;margin-bottom:24px}
-  .g3d__art,.g3d__art--l,.g3d__art--r{position:relative;left:auto;top:auto;width:auto;height:auto;transform:none!important}
-  .g3d__frame{position:relative;height:280px;border-width:6px}
-  .g3d__label{position:static;transform:none;text-align:left;margin-top:10px;white-space:normal}
-  .g3d__cta{position:static;transform:none;opacity:1;margin-top:20px;text-align:center}
   *{scroll-behavior:auto}
 }
 
@@ -358,6 +349,7 @@ body.nav-open .burger span:nth-child(3){transform:translateY(-8.5px) rotate(-45d
 /* Gallery camera ---------------------------------------------------------- */
 .roomgal{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
 .roomgal .masonry__item{margin-bottom:0}
+.roomgal:has(>:nth-child(2):last-child){grid-template-columns:repeat(2,1fr)}
 .roomgal .masonry__item img{aspect-ratio:4/3;object-fit:cover}
 
 /* ===== WOW · Intro "Vernissage" ===== */
@@ -418,49 +410,21 @@ body.intro-lock{overflow:hidden}
 .hero__mute{position:absolute;top:104px;right:var(--gutter);z-index:6;width:44px;height:44px;border:1px solid rgba(245,239,227,.5);border-radius:50%;display:grid;place-items:center;color:var(--cream);background:rgba(15,20,28,.32);backdrop-filter:blur(6px);transition:background .3s var(--ease),color .3s var(--ease)}
 .hero__mute:hover{background:var(--cream);color:var(--navy)}
 .hero__mute svg{width:18px;height:18px}
-@media (max-width:760px){.hero__mute{top:auto;bottom:120px}}
+@media (max-width:760px){.hero__mute{top:auto;bottom:36px}}
 
-/* ===== WOW+ · "La Galleria 3D" — corridoio rinascimentale (pietra serena, volta a grottesche, cornici dorate) ===== */
-.g3d{position:relative;height:340vh;background:#e9dfcb}
-.g3d__sticky{position:sticky;top:0;height:100vh;overflow:hidden;perspective:1400px;perspective-origin:50% 56%;background:radial-gradient(60% 50% at 50% 52%,#fbf5e6,#e6dbc4 70%,#d6c8ab)}
-.g3d__scene{position:absolute;inset:0;transform-style:preserve-3d;transform:translateZ(var(--cam,0px))}
-.g3d__wall{position:absolute;top:0;height:100%;width:5600px;transform-origin:0 50%;transform:rotateY(90deg);background:url("../img/ui/parete.svg") 0 0/640px 100% repeat-x,#efe6d3}
-.g3d__wall--l{left:-7%}
-.g3d__wall--r{left:107%}
-.g3d__ceil{position:absolute;left:-7%;width:114%;top:0;height:5600px;transform-origin:50% 0;transform:rotateX(-90deg);background:
-  repeating-linear-gradient(180deg,transparent 0 616px,#b99a5e 616px 622px,#efe6d3 622px 634px,#b99a5e 634px 640px),
-  url("../img/ui/grottesca.svg") center top/400px 640px repeat,
-  #efe5cf}
-.g3d__floor{position:absolute;left:-7%;width:114%;top:100%;height:5600px;transform-origin:50% 0;transform:rotateX(-90deg);background:
-  repeating-linear-gradient(90deg,rgba(90,80,64,.28) 0 2px,transparent 2px 160px),
-  repeating-linear-gradient(0deg,rgba(90,80,64,.28) 0 2px,transparent 2px 160px),
-  repeating-conic-gradient(#d9ccb2 0 25%,#c7b797 0 50%) 0 0/320px 320px}
-.g3d__end{position:absolute;left:-7%;width:114%;top:0;height:100%;transform:translateZ(-5600px);background:linear-gradient(180deg,#837d71 0 2.4%,#d3c7ae 2.4% 4%,#efe6d3 4% 88%,#d6caaf 88%);display:grid;place-items:end center}
-.g3d__end span{width:30%;height:80%;margin-bottom:11.5%;border-radius:999px 999px 0 0;background:radial-gradient(70% 60% at 50% 38%,#fffdf6,#f6ecd2 55%,#e7d6ad);box-shadow:0 0 0 22px #8f897d,0 0 0 30px #b8ae9b,0 0 180px 70px rgba(255,246,220,.75)}
-.g3d__bust{position:absolute;top:60%;width:120px;height:320px;transform-style:preserve-3d;filter:drop-shadow(0 30px 24px rgba(60,45,25,.35))}
-.g3d__bust svg{width:100%;height:100%;display:block}
-.g3d__bust--l{left:3%;transform:translate(-50%,-50%) translateZ(var(--z)) rotateY(35deg)}
-.g3d__bust--r{left:97%;transform:translate(-50%,-50%) translateZ(var(--z)) rotateY(-35deg)}
-.g3d__art{position:absolute;top:56%;width:440px;height:580px;transform-style:preserve-3d}
-.g3d__art--l{left:11%;transform:translate(-50%,-50%) translateZ(var(--z)) rotateY(24deg)}
-.g3d__art--r{left:89%;transform:translate(-50%,-50%) translateZ(var(--z)) rotateY(-24deg)}
-.g3d__frame{position:absolute;inset:0;border:18px solid #a8843f;border-image:linear-gradient(135deg,#6f5120,#e9d496 20%,#9c7a36 42%,#f6e7b3 60%,#7d5d26 82%,#caa85c) 1;box-shadow:inset 0 0 0 3px #3b2c14,0 36px 70px rgba(70,50,25,.38);background:#2a2118;overflow:hidden}
-.g3d__frame img{width:100%;height:100%;object-fit:cover}
-.g3d__art:hover .g3d__frame{box-shadow:inset 0 0 0 3px #3b2c14,0 0 46px rgba(214,178,98,.55),0 36px 70px rgba(70,50,25,.38)}
-.g3d__glow{position:absolute;left:50%;top:-46px;width:170%;height:80px;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(255,232,170,.75),transparent);filter:blur(8px)}
-.g3d__label{position:absolute;left:50%;bottom:-66px;transform:translateX(-50%);text-align:center;white-space:nowrap}
-.g3d__label b{display:block;font-family:var(--display);font-size:1.3rem;color:var(--ink)}
-.g3d__label i{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-style:normal}
-.g3d__vignette{position:absolute;inset:0;pointer-events:none;z-index:3;background:radial-gradient(120% 95% at 50% 46%,transparent 46%,rgba(92,70,40,.42) 100%)}
-.g3d__intro{position:absolute;top:0;left:0;right:0;z-index:4;text-align:center;padding:clamp(92px,12vh,132px) var(--gutter) 46px;background:linear-gradient(180deg,rgba(240,233,218,.96) 38%,rgba(240,233,218,0));transition:opacity .5s ease}
-.g3d__intro h2{font-size:clamp(1.6rem,3.4vw,2.6rem);margin:10px 0 8px}
-.g3d__intro p{font-size:.95rem}
-.g3d__intro .eyebrow{color:var(--gold)}
-.g3d__intro h2{color:var(--ink);margin:14px 0}
-.g3d__intro p{color:var(--ink-dim);max-width:48ch;margin-inline:auto}
-.g3d__hint{display:inline-block;margin-top:18px;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
-.g3d__cta{position:absolute;left:50%;bottom:9%;transform:translateX(-50%);z-index:4;opacity:0;transition:opacity .5s ease}
-.g3d.show-cta .g3d__cta{opacity:1}
+/* ===== La Galleria delle Camere — parete da museo (pietra serena, cornici dorate, targhette) ===== */
+.vern{position:relative;padding-block:clamp(48px,6vw,92px);background:linear-gradient(180deg,#efe6d3 0,#e7dcc5 100%)}
+.vern::after{content:"";position:absolute;left:0;right:0;bottom:0;height:clamp(26px,4vw,52px);background:linear-gradient(180deg,#8d8470,#6f6757);border-top:3px solid #b9ad92}
+.vern .wrap{position:relative;z-index:1;padding-bottom:clamp(30px,4vw,60px)}
+.vern__wall{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(18px,2.4vw,40px);align-items:start}
+.vern__art{display:block;text-align:center}
+.vern__frame{display:block;aspect-ratio:3/4;border:14px solid #a8843f;border-image:linear-gradient(135deg,#6f5120,#e9d496 20%,#9c7a36 42%,#f6e7b3 60%,#7d5d26 82%,#caa85c) 1;box-shadow:inset 0 0 0 3px #3b2c14,0 26px 44px -12px rgba(70,50,25,.45);background:#2a2118;overflow:hidden;transition:box-shadow .4s var(--ease),transform .4s var(--ease)}
+.vern__frame img{width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease)}
+.vern__art:hover .vern__frame{transform:translateY(-4px);box-shadow:inset 0 0 0 3px #3b2c14,0 0 34px rgba(214,178,98,.5),0 30px 50px -12px rgba(70,50,25,.45)}
+.vern__art:hover .vern__frame img{transform:scale(1.05)}
+.vern__plaque{display:inline-block;margin-top:18px;padding:9px 20px;background:linear-gradient(135deg,#d9bd7a,#f3e3ae 50%,#c9a85a);color:#2a2118;border-radius:2px;box-shadow:0 2px 6px rgba(70,50,25,.3)}
+.vern__plaque b{display:block;font-family:var(--display);font-size:1.02rem;font-weight:600}
+.vern__plaque i{display:block;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;font-style:normal;margin-top:2px;color:#5b4520}
 
 /* Strip fotografica (colazione / esperienze) */
 .pstrip{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:clamp(36px,5vw,56px)}
@@ -469,6 +433,7 @@ body.intro-lock{overflow:hidden}
 
 /* Responsive -------------------------------------------------------------- */
 @media (max-width:1024px){
+  .vern__wall{grid-template-columns:repeat(2,1fr)}
   .masonry{columns:2}
   .jgrid,.howto{grid-template-columns:repeat(2,1fr)}
   .dist{grid-template-columns:1fr}
@@ -492,6 +457,10 @@ body.intro-lock{overflow:hidden}
   .rooms,.exp,.amen,.amen--left,.jgrid,.howto,.roomgal,.jfeat,.rooms--4,.side{grid-template-columns:1fr}
   .pstrip{grid-template-columns:repeat(2,1fr);gap:10px}
   .masonry{columns:1}
+  .vern__wall{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:16px;margin-inline:calc(var(--gutter)*-1);padding:6px var(--gutter) 14px;scrollbar-width:none}
+  .vern__wall::-webkit-scrollbar{display:none}
+  .vern__art{flex:0 0 72%;scroll-snap-align:center}
+  .vern__frame{border-width:10px}
   .dist{grid-template-columns:1fr}
   .booking{margin-top:-24px}
   .booking__box{grid-template-columns:1fr}
@@ -500,7 +469,8 @@ body.intro-lock{overflow:hidden}
   /* CTA Prenota resta accessibile nell'header su mobile */
   .nav__right .btn{display:inline-flex;padding:10px 16px;font-size:.66rem;letter-spacing:.12em}
   .hero{min-height:88vh}
-  .hero__in{padding:120px 0 150px}
+  .hero__in{padding-block:120px 150px;padding-inline:max(var(--gutter),26px)}
+  .phero__in{padding-inline:max(var(--gutter),26px)}
   .mapwrap iframe{height:320px}
   .news__form{flex-direction:column}
   /* Parete del museo: su mobile diventa carosello con swipe */
@@ -510,15 +480,6 @@ body.intro-lock{overflow:hidden}
   .wall__panel{width:82vw;height:62vh;scroll-snap-align:center}
   .wall__panel--intro{width:82vw;height:auto;padding:20px 0}
   /* Galleria 3D: su mobile diventa una sequenza di quadri verticale */
-  .g3d{height:auto;background:#ece3d1}
-  .g3d__sticky{position:static;height:auto;overflow:visible;perspective:none;background:none;padding-block:clamp(56px,9vw,90px)}
-  .g3d__scene{position:static;transform:none!important;display:grid;grid-template-columns:1fr;gap:26px;padding-inline:var(--gutter)}
-  .g3d__floor,.g3d__vignette,.g3d__glow,.g3d__wall,.g3d__ceil,.g3d__end,.g3d__bust{display:none}
-  .g3d__intro{position:static;display:block;text-align:center;margin-bottom:26px}
-  .g3d__art,.g3d__art--l,.g3d__art--r{position:relative;left:auto;top:auto;width:auto;height:auto;transform:none!important}
-  .g3d__frame{position:relative;height:66vw;border-width:6px}
-  .g3d__label{position:static;transform:none;text-align:left;margin-top:12px;white-space:normal}
-  .g3d__cta{position:static;transform:none;opacity:1;margin-top:24px;text-align:center}
 }
 @media (max-width:520px){
   .topbar__badge{display:none}
