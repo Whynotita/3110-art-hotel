@@ -78,15 +78,34 @@
     });
   }
 
-  // Filtro gallery
-  var fbtns = document.querySelectorAll(".filter button");
+  // Filtro gallery (categoria + sotto-filtro camere)
+  var fbtns = document.querySelectorAll(".filter:not(.filter--sub) button");
+  var rbtns = document.querySelectorAll(".filter--sub button");
+  var rbox = document.getElementById("roomFilter");
   var items = document.querySelectorAll(".masonry__item");
+  var curCat = "all", curRoom = "all";
+  var applyFilter = function () {
+    items.forEach(function (it) {
+      var ok = (curCat === "all" || it.dataset.cat === curCat) && (curCat !== "camere" || curRoom === "all" || it.dataset.room === curRoom);
+      it.classList.toggle("is-hidden", !ok);
+    });
+    if (rbox) rbox.hidden = curCat !== "camere";
+  };
   fbtns.forEach(function (btn) {
     btn.addEventListener("click", function () {
       fbtns.forEach(function (b) { b.classList.remove("active"); });
       btn.classList.add("active");
-      var cat = btn.dataset.filter;
-      items.forEach(function (it) { it.classList.toggle("is-hidden", !(cat === "all" || it.dataset.cat === cat)); });
+      curCat = btn.dataset.filter; curRoom = "all";
+      rbtns.forEach(function (b) { b.classList.toggle("active", b.dataset.room === "all"); });
+      applyFilter();
+    });
+  });
+  rbtns.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      rbtns.forEach(function (b) { b.classList.remove("active"); });
+      btn.classList.add("active");
+      curRoom = btn.dataset.room;
+      applyFilter();
     });
   });
 
@@ -212,29 +231,5 @@
       setInterval(function () { if (performance.now() - rLast > 2400) rIdle = true; }, 700);
       rRaf = requestAnimationFrame(rLoop);
     }
-  }
-
-  /* WOW+ · "La Galleria 3D" (corridoio museo) ----------------------------- */
-  var g3d = document.querySelector(".g3d");
-  if (g3d && !reduced) {
-    var scene = g3d.querySelector(".g3d__scene");
-    var gIntro = g3d.querySelector(".g3d__intro");
-    var CAM = 3900;
-    var gTick = false;
-    var gMobile = function () { return window.matchMedia("(max-width: 760px)").matches; };
-    var gRender = function () {
-      if (gMobile()) { if (scene) scene.style.transform = ""; gTick = false; return; }
-      var vh = window.innerHeight;
-      var travel = g3d.offsetHeight - vh;
-      var prog = Math.min(Math.max(-g3d.getBoundingClientRect().top / travel, 0), 1);
-      scene.style.setProperty("--cam", (prog * CAM).toFixed(1) + "px");
-      if (gIntro) gIntro.style.opacity = Math.max(1 - prog * 7, 0);
-      g3d.classList.toggle("show-cta", prog > 0.9);
-      gTick = false;
-    };
-    var gReq = function () { if (!gTick) { gTick = true; requestAnimationFrame(gRender); } };
-    window.addEventListener("scroll", gReq, { passive: true });
-    window.addEventListener("resize", gReq, { passive: true });
-    gRender();
   }
 })();
