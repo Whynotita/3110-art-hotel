@@ -44,9 +44,8 @@
     window.addEventListener("resize", req, { passive: true }); run();
   }
 
-  document.querySelectorAll(".lang button").forEach(function (b) {
-    b.addEventListener("click", function () { if (b.dataset.lang === "en") alert("Versione inglese in preparazione."); });
-  });
+  var LANG = (document.documentElement.lang || "it").slice(0, 2);
+  var T = { it: ["Chiudi", "Precedente", "Successiva"], en: ["Close", "Previous", "Next"], es: ["Cerrar", "Anterior", "Siguiente"] }[LANG] || ["Chiudi", "Precedente", "Successiva"];
 
   // Booking bar: date modificabili + apertura motore Beddy con ricerca precompilata
   var bForm = document.getElementById("bookForm");
@@ -73,7 +72,7 @@
       e.preventDefault();
       syncOut();
       var search = { date_from: bIn.value, date_to: bOut.value, rooms: [{ adults: parseInt(bGuests.value, 10) || 2, children: [] }] };
-      var url = "https://3110arthotelfirenze.beddy.io/#/(beddy:home)?lang=it&search=" + encodeURIComponent(btoa(JSON.stringify(search)));
+      var url = "https://3110arthotelfirenze.beddy.io/#/(beddy:home)?lang=" + LANG + "&search=" + encodeURIComponent(btoa(JSON.stringify(search)));
       window.open(url, "_blank", "noopener");
     });
   }
@@ -114,7 +113,7 @@
   if (lbItems.length) {
     var lb = document.createElement("div");
     lb.className = "lightbox";
-    lb.innerHTML = '<button class="lightbox__x" aria-label="Chiudi">×</button><button class="lightbox__nav lightbox__nav--p" aria-label="Precedente">‹</button><button class="lightbox__nav lightbox__nav--n" aria-label="Successiva">›</button><img alt=""><div class="lightbox__cap"></div>';
+    lb.innerHTML = '<button class="lightbox__x" aria-label="' + T[0] + '">×</button><button class="lightbox__nav lightbox__nav--p" aria-label="' + T[1] + '">‹</button><button class="lightbox__nav lightbox__nav--n" aria-label="' + T[2] + '">›</button><img alt=""><div class="lightbox__cap"></div>';
     document.body.appendChild(lb);
     var lbImg = lb.querySelector("img"), lbCap = lb.querySelector(".lightbox__cap"), cur = 0;
     var vis = function () { return lbItems.filter(function (i) { return !i.classList.contains("is-hidden"); }); };

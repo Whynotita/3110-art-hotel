@@ -10,7 +10,7 @@
   var sm = function (a, b, x) { x = clamp((x - a) / (b - a)); return x * x * (3 - 2 * x); };
   var seed = 11, rnd = function () { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
   var mk = function () { return document.createElement("canvas"); };
-  var W, H, dpr, lines, textC = mk(), maskC = mk(), tmpC = mk(), noisePat, tctx, mctx, xctx, S1;
+  var W, H, dpr, lines, ranges, portraitImg = null, textC = mk(), maskC = mk(), tmpC = mk(), noisePat, tctx, mctx, xctx, S1;
   var target = 0, shown = 0, lastInput = Date.now(), opened = false, dirty = true;
 
   /* inert sul resto della pagina mentre l'intro e' aperta */
@@ -26,37 +26,79 @@
     tctx = textC.getContext("2d"); mctx = maskC.getContext("2d"); xctx = tmpC.getContext("2d");
     [ctx, tctx, mctx, xctx].forEach(function (c) { c.setTransform(dpr, 0, 0, dpr, 0, 0); });
     var disp = "'Playfair Display',Georgia,serif", sans = "'Montserrat',system-ui,sans-serif";
-    S1 = Math.min(W * .3, H * .34);
+    var hasP = !!portraitImg;
+
+    /* dimensioni: ritratto ovale in primo piano + 31.10 / ART HOTEL / FIRENZE sotto */
+    var topPad = 64, ctaZone = Math.max(150, H * .09 + 140), avail = Math.max(200, H - topPad - ctaZone);
+    var Ho = hasP ? Math.min(H * .41, W * .64 * 1.25) : 0;
+    S1 = hasP ? Math.min(W * .24, H * .13) : Math.min(W * .3, H * .34);
+    var blockOf = function (ho, s1) { return (ho ? ho + s1 * .26 : 0) + s1 * .72 + s1 * .16 + s1 * .2 * .7 + s1 * .2 * .9 + s1 * .1 * .7; };
+    var k = Math.min(1, avail / blockOf(Ho, S1)); Ho *= k; S1 *= k;
     tctx.font = "500 " + S1 + "px " + disp; var w1 = tctx.measureText("31.10").width;
     if (w1 > W * .86) { S1 *= W * .86 / w1; tctx.font = "500 " + S1 + "px " + disp; w1 = tctx.measureText("31.10").width; }
-    var S2 = S1 * .2, sp2 = S2 * .34, S3 = S1 * .1, sp3 = S3 * .6, t2 = "ART HOTEL", t3 = "FIRENZE";
+    var S2 = S1 * .2, sp2 = S2 * .34, S3 = S1 * .1, sp3 = S3 * .6, t2 = "ART HOTEL", t3 = ({ en: "FLORENCE", es: "FLORENCIA" })[(doc.lang || "it").slice(0, 2)] || "FIRENZE";
     var wSp = function (t, font, sp) { tctx.font = font; var w = 0; for (var i = 0; i < t.length; i++) w += tctx.measureText(t[i]).width + sp; return w - sp; };
     var f2 = "600 " + S2 + "px " + disp, f3 = "500 " + S3 + "px " + sans;
     var w2 = wSp(t2, f2, sp2), w3 = wSp(t3, f3, sp3);
-    var gap1 = S1 * .16, gap2 = S2 * .9, blockH = S1 * .72 + gap1 + S2 * .7 + gap2 + S3 * .7;
-    var y = H * .5 - blockH / 2 - H * .03 + S1 * .72, L = [];
+    var gap1 = S1 * .16, gap2 = S2 * .9, gapP = S1 * .26;
+    var blockH = blockOf(Ho, S1);
+    var yTop = topPad + Math.max(0, (avail - blockH) / 2);
+    var L = [];
+    var y = yTop;
+    if (hasP) {
+      var ow = Ho * .8; L.push({ portrait: true, x: (W - ow) / 2, top: y, w: ow, h: Ho, bw: Ho * .034, color: "#3a2a1a" });
+      y += Ho + gapP;
+    }
+    y += S1 * .72;
     L.push({ t: "31.10", font: "500 " + S1 + "px " + disp, sp: 0, w: w1, x: (W - w1) / 2, base: y, color: "#16202E", h: S1 * .72, bw: S1 * .028, big: true });
     y += gap1 + S2 * .7;
     L.push({ t: t2, font: f2, sp: sp2, w: w2, x: (W - w2) / 2, base: y, color: "#9C7C3A", h: S2 * .7, bw: S2 * .1 });
     y += gap2 + S3 * .7;
     L.push({ t: t3, font: f3, sp: sp3, w: w3, x: (W - w3) / 2, base: y, color: "#4a4538", h: S3 * .7, bw: S3 * .13 });
     lines = L;
+    ranges = hasP ? [[.03, .36], [.36, .6], [.6, .76], [.76, .85]] : [[.03, .52], [.52, .76], [.76, .85]];
+
     tctx.clearRect(0, 0, W, H); tctx.textBaseline = "alphabetic";
-    L.forEach(function (l) { tctx.font = l.font; tctx.fillStyle = l.color; var x = l.x; for (var i = 0; i < l.t.length; i++) { var ch = l.t[i]; tctx.fillText(ch, x, l.base); x += tctx.measureText(ch).width + l.sp; } });
+    L.forEach(function (l) {
+      if (l.portrait) {
+        var cx = l.x + l.w / 2, cy = l.top + l.h / 2, ir = portraitImg.width / portraitImg.height, er = l.w / l.h, sw, sh, sx, sy;
+        if (ir > er) { sh = portraitImg.height; sw = sh * er; sx = (portraitImg.width - sw) / 2; sy = 0; } else { sw = portraitImg.width; sh = sw / er; sx = 0; sy = (portraitImg.height - sh) * .1; }
+        tctx.save(); tctx.beginPath(); tctx.ellipse(cx, cy, l.w / 2, l.h / 2, 0, 0, Math.PI * 2); tctx.clip();
+        tctx.drawImage(portraitImg, sx, sy, sw, sh, l.x, l.top, l.w, l.h);
+        var g = tctx.createRadialGradient(cx, cy, l.h * .25, cx, cy, l.h * .62); g.addColorStop(0, "rgba(30,20,8,0)"); g.addColorStop(1, "rgba(30,20,8,.28)");
+        tctx.fillStyle = g; tctx.fillRect(l.x, l.top, l.w, l.h); tctx.restore();
+        tctx.lineWidth = Math.max(2, l.h * .01); tctx.strokeStyle = "#9C7C3A"; tctx.beginPath(); tctx.ellipse(cx, cy, l.w / 2, l.h / 2, 0, 0, Math.PI * 2); tctx.stroke();
+        tctx.lineWidth = 1; tctx.strokeStyle = "rgba(156,124,58,.55)"; tctx.beginPath(); tctx.ellipse(cx, cy, l.w / 2 + l.h * .022, l.h / 2 + l.h * .022, 0, 0, Math.PI * 2); tctx.stroke();
+        return;
+      }
+      tctx.font = l.font; tctx.fillStyle = l.color; var x = l.x; for (var i = 0; i < l.t.length; i++) { var ch = l.t[i]; tctx.fillText(ch, x, l.base); x += tctx.measureText(ch).width + l.sp; }
+    });
     seed = 11;
     L.forEach(function (l) {
-      l.top = l.base - l.h; l.strokes = []; var x = l.x; tctx.font = l.font;
+      l.strokes = [];
+      if (l.portrait) {
+        var cols = Math.max(3, Math.round(l.w / (l.h * .2))), colW = l.w / cols;
+        for (var c = 0; c < cols; c++) {
+          var cx = l.x + (c + .5) * colW, dir = c % 2 ? -1 : 1, ext = l.h * .1, tilt = (rnd() - .5) * l.h * .05;
+          var p0 = [cx - tilt, l.top - ext], p1 = [cx + tilt, l.top + l.h + ext], th = colW * 1.5;
+          var n = Math.max(8, Math.round(th / (l.bw * .5))), bs = [];
+          for (var b = 0; b < n; b++) bs.push({ off: ((b + .5) / n - .5) * th + (rnd() - .5) * l.bw * .4, w: l.bw * (.9 + rnd() * .9), a: .8 + rnd() * .2, s: rnd() * l.h * .05, e: rnd() * l.h * .05, ph: rnd() * 6, amp: (rnd() * .5 + .2) * l.bw * .45, lag: rnd() * .06 });
+          l.strokes.push({ p0: dir > 0 ? p0 : p1, p1: dir > 0 ? p1 : p0, th: th, bs: bs, col: l.color });
+        }
+        return;
+      }
+      l.top = l.base - l.h; var x = l.x; tctx.font = l.font;
       for (var ci = 0; ci < l.t.length; ci++) {
         var ch = l.t[ci], cw = tctx.measureText(ch).width;
         if (ch !== " ") {
-          var cols = ch === "." ? 1 : Math.max(1, Math.round(cw / (l.h * (l.big ? .36 : .9))));
-          for (var c = 0; c < cols; c++) {
-            var colW = cw / cols, cx = x + (c + .5) * colW, dir = (ci + c) % 2 ? -1 : 1, ext = l.h * .12, tilt = (rnd() - .5) * l.h * .12;
-            var p0 = [cx - tilt, l.top - ext], p1 = [cx + tilt, l.base + ext];
-            var th = Math.min(colW * (l.big ? 1.35 : 1.5), l.h * .9) * (ch === "." ? 1.5 : 1);
-            var n = Math.max(6, Math.round(th / (l.bw * .55))), bs = [];
-            for (var b = 0; b < n; b++) bs.push({ off: ((b + .5) / n - .5) * th + (rnd() - .5) * l.bw * .4, w: l.bw * (.8 + rnd() * .8), a: .72 + rnd() * .28, s: rnd() * l.h * .1, e: rnd() * l.h * .1, ph: rnd() * 6, amp: (rnd() * .5 + .2) * l.bw * .45, lag: rnd() * .06 });
-            l.strokes.push({ p0: dir > 0 ? p0 : p1, p1: dir > 0 ? p1 : p0, th: th, bs: bs, col: l.color });
+          var cols2 = ch === "." ? 1 : Math.max(1, Math.round(cw / (l.h * (l.big ? .36 : .9))));
+          for (var c2 = 0; c2 < cols2; c2++) {
+            var colW2 = cw / cols2, cx2 = x + (c2 + .5) * colW2, dir2 = (ci + c2) % 2 ? -1 : 1, ext2 = l.h * .12, tilt2 = (rnd() - .5) * l.h * .12;
+            var q0 = [cx2 - tilt2, l.top - ext2], q1 = [cx2 + tilt2, l.base + ext2];
+            var th2 = Math.min(colW2 * (l.big ? 1.35 : 1.5), l.h * .9) * (ch === "." ? 1.5 : 1);
+            var n2 = Math.max(6, Math.round(th2 / (l.bw * .55))), bs2 = [];
+            for (var b2 = 0; b2 < n2; b2++) bs2.push({ off: ((b2 + .5) / n2 - .5) * th2 + (rnd() - .5) * l.bw * .4, w: l.bw * (.8 + rnd() * .8), a: .72 + rnd() * .28, s: rnd() * l.h * .1, e: rnd() * l.h * .1, ph: rnd() * 6, amp: (rnd() * .5 + .2) * l.bw * .45, lag: rnd() * .06 });
+            l.strokes.push({ p0: dir2 > 0 ? q0 : q1, p1: dir2 > 0 ? q1 : q0, th: th2, bs: bs2, col: l.color });
           }
         }
         x += cw + l.sp;
@@ -70,7 +112,7 @@
 
   function drawMask(p) {
     mctx.clearRect(0, 0, W, H); mctx.lineCap = "round"; mctx.lineJoin = "round";
-    var ranges = [[.03, .52], [.52, .76], [.76, .85]], head = null;
+    var head = null;
     lines.forEach(function (l, li) {
       var lp = clamp((p - ranges[li][0]) / (ranges[li][1] - ranges[li][0])), N = l.strokes.length;
       l.strokes.forEach(function (s, k) {
@@ -146,9 +188,13 @@
     if (shown > .985 && target >= 1) schedule();
     requestAnimationFrame(loop);
   }
+  var pSrc = el.getAttribute("data-portrait"), pReady = new Promise(function (res) {
+    if (!pSrc) return res();
+    var i = new Image(); i.onload = function () { portraitImg = i; res(); if (started && !opened) build(); }; i.onerror = function () { res(); }; i.src = pSrc;
+  });
   var started = false;
   function start() { if (started) return; started = true; build(); el.focus({ preventScroll: true }); loop(); }
-  var fonts = document.fonts && document.fonts.load ? Promise.all([document.fonts.load("500 100px 'Playfair Display'"), document.fonts.load("600 20px 'Playfair Display'"), document.fonts.load("500 20px 'Montserrat'")]) : Promise.resolve();
+  var fonts = document.fonts && document.fonts.load ? Promise.all([pReady, document.fonts.load("500 100px 'Playfair Display'"), document.fonts.load("600 20px 'Playfair Display'"), document.fonts.load("500 20px 'Montserrat'")]) : pReady;
   Promise.race([fonts, new Promise(function (r) { setTimeout(r, 2500); })]).catch(function () {}).then(start);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { if (started && !opened) build(); });
 })();
