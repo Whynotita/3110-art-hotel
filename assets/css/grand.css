@@ -412,20 +412,6 @@ body.intro-lock{overflow:hidden}
 .hero__mute svg{width:18px;height:18px}
 @media (max-width:760px){.hero__mute{top:auto;bottom:36px}}
 
-/* ===== La Galleria delle Camere — parete da museo (pietra serena, cornici dorate, targhette) ===== */
-.vern{position:relative;padding-block:clamp(48px,6vw,92px);background:linear-gradient(180deg,#efe6d3 0,#e7dcc5 100%)}
-.vern::after{content:"";position:absolute;left:0;right:0;bottom:0;height:clamp(26px,4vw,52px);background:linear-gradient(180deg,#8d8470,#6f6757);border-top:3px solid #b9ad92}
-.vern .wrap{position:relative;z-index:1;padding-bottom:clamp(30px,4vw,60px)}
-.vern__wall{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(18px,2.4vw,40px);align-items:start}
-.vern__art{display:block;text-align:center}
-.vern__frame{display:block;aspect-ratio:3/4;border:14px solid #a8843f;border-image:linear-gradient(135deg,#6f5120,#e9d496 20%,#9c7a36 42%,#f6e7b3 60%,#7d5d26 82%,#caa85c) 1;box-shadow:inset 0 0 0 3px #3b2c14,0 26px 44px -12px rgba(70,50,25,.45);background:#2a2118;overflow:hidden;transition:box-shadow .4s var(--ease),transform .4s var(--ease)}
-.vern__frame img{width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease)}
-.vern__art:hover .vern__frame{transform:translateY(-4px);box-shadow:inset 0 0 0 3px #3b2c14,0 0 34px rgba(214,178,98,.5),0 30px 50px -12px rgba(70,50,25,.45)}
-.vern__art:hover .vern__frame img{transform:scale(1.05)}
-.vern__plaque{display:inline-block;margin-top:18px;padding:9px 20px;background:linear-gradient(135deg,#d9bd7a,#f3e3ae 50%,#c9a85a);color:#2a2118;border-radius:2px;box-shadow:0 2px 6px rgba(70,50,25,.3)}
-.vern__plaque b{display:block;font-family:var(--display);font-size:1.02rem;font-weight:600}
-.vern__plaque i{display:block;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;font-style:normal;margin-top:2px;color:#5b4520}
-
 /* Strip fotografica (colazione / esperienze) */
 .pstrip{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:clamp(36px,5vw,56px)}
 .pstrip .masonry__item{margin-bottom:0}
@@ -433,7 +419,6 @@ body.intro-lock{overflow:hidden}
 
 /* Responsive -------------------------------------------------------------- */
 @media (max-width:1024px){
-  .vern__wall{grid-template-columns:repeat(2,1fr)}
   .masonry{columns:2}
   .jgrid,.howto{grid-template-columns:repeat(2,1fr)}
   .dist{grid-template-columns:1fr}
@@ -457,10 +442,6 @@ body.intro-lock{overflow:hidden}
   .rooms,.exp,.amen,.amen--left,.jgrid,.howto,.roomgal,.jfeat,.rooms--4,.side{grid-template-columns:1fr}
   .pstrip{grid-template-columns:repeat(2,1fr);gap:10px}
   .masonry{columns:1}
-  .vern__wall{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:16px;margin-inline:calc(var(--gutter)*-1);padding:6px var(--gutter) 14px;scrollbar-width:none}
-  .vern__wall::-webkit-scrollbar{display:none}
-  .vern__art{flex:0 0 72%;scroll-snap-align:center}
-  .vern__frame{border-width:10px}
   .dist{grid-template-columns:1fr}
   .booking{margin-top:-24px}
   .booking__box{grid-template-columns:1fr}
@@ -509,3 +490,43 @@ body{counter-reset:sec}
   .shead>p{grid-column:1;grid-row:auto;margin-top:12px}
   .rooms--2{grid-template-columns:1fr}
 }
+
+/* ===== Le camere d'autore — minimal ===== */
+.rcard__media{display:block}
+.rcard__price{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);line-height:1.5}
+.rooms--3{grid-template-columns:repeat(3,1fr)}
+.autore__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(22px,3vw,44px)}
+.autore__i{display:flex;flex-direction:column;align-items:flex-start;color:var(--ink)}
+.autore__m{display:block;width:100%;aspect-ratio:4/5;overflow:hidden;background:var(--ivory-2)}
+.autore__m img{width:100%;height:100%;object-fit:cover;transition:transform 1.1s var(--ease)}
+.autore__i:hover .autore__m img,.autore__i:focus-visible .autore__m img{transform:scale(1.045)}
+.autore__k{margin-top:18px;font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+.autore__t{margin-top:6px;font-family:var(--display);font-size:clamp(1.15rem,1.6vw,1.45rem);line-height:1.25;color:var(--ink)}
+.autore__go{position:relative;margin-top:12px;padding-bottom:5px;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim)}
+.autore__go::after{content:"";position:absolute;left:0;bottom:0;width:28px;height:1px;background:var(--gold);transition:width .5s var(--ease)}
+.autore__i:hover .autore__go::after,.autore__i:focus-visible .autore__go::after{width:100%}
+.autore__i:focus-visible{outline:2px solid var(--gold);outline-offset:6px}
+@media (max-width:1024px){.autore__grid{grid-template-columns:repeat(2,1fr)}.rooms--3{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:760px){
+  .autore__grid{gap:26px 14px}
+  .autore__k{margin-top:12px}
+  .autore__go{display:none}
+  .rooms--3{grid-template-columns:1fr}
+}
+
+/* ===== Selettore lingua ===== */
+.topbar .lang a{display:inline-block;color:var(--cream-dim);min-height:24px;line-height:24px;padding:0 2px;transition:color .3s}
+.topbar .lang a.active{color:var(--cream)}
+.topbar .lang a:hover,.topbar .lang a:focus-visible{color:var(--gold-2)}
+
+/* ===== Pulsante WhatsApp ===== */
+.wa{position:fixed;right:clamp(14px,2.4vw,28px);bottom:clamp(14px,2.4vw,28px);z-index:90;display:inline-flex;align-items:center;gap:10px;height:56px;min-width:56px;padding:0 16px;border-radius:999px;
+  background:#1FA855;color:#fff;box-shadow:0 10px 28px rgba(15,25,20,.28);font:600 .74rem/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;transition:transform .3s var(--ease),background .3s,box-shadow .3s}
+.wa svg{width:26px;height:26px;flex:none}
+.wa__t{max-width:0;overflow:hidden;white-space:nowrap;opacity:0;transition:max-width .4s var(--ease),opacity .3s}
+.wa:hover,.wa:focus-visible{background:#168a45;transform:translateY(-2px);box-shadow:0 14px 32px rgba(15,25,20,.34)}
+.wa:hover .wa__t,.wa:focus-visible .wa__t{max-width:140px;opacity:1}
+.wa:focus-visible{outline:3px solid var(--gold-2);outline-offset:3px}
+.pi-on .wa{display:none}
+@media (max-width:760px){.wa{height:52px;min-width:52px;padding:0 13px}.wa svg{width:26px;height:26px}}
+@media print{.wa{display:none}}
