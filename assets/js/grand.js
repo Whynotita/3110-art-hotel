@@ -188,6 +188,28 @@
     wallRender();
   }
 
+  /* Hero video: avvio affidabile su mobile (iOS/Android, risparmio energetico) */
+  (function () {
+    var v = document.querySelector(".hero__video");
+    if (!v) return;
+    v.muted = true; v.defaultMuted = true; v.playsInline = true;
+    v.setAttribute("muted", ""); v.setAttribute("playsinline", "");
+    var go = function () {
+      if (!v.paused) return;
+      var p = v.play();
+      if (p && p.catch) p.catch(function () {});
+    };
+    ["loadedmetadata", "loadeddata", "canplay"].forEach(function (e) { v.addEventListener(e, go); });
+    window.addEventListener("pageshow", go);
+    document.addEventListener("visibilitychange", function () { if (!document.hidden) go(); });
+    ["touchstart", "pointerdown", "scroll", "click", "keydown"].forEach(function (e) {
+      var h = function () { go(); if (!v.paused) window.removeEventListener(e, h); };
+      window.addEventListener(e, h, { passive: true });
+    });
+    new MutationObserver(go).observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+    go();
+  })();
+
   /* Hero video: toggle audio + fallback poster ---------------------------- */
   var hVid = document.querySelector(".hero__video"), hMute = document.querySelector(".hero__mute");
   if (hVid && hMute) {
