@@ -530,3 +530,10 @@ body{counter-reset:sec}
 .pi-on .wa{display:none}
 @media (max-width:760px){.wa{height:52px;min-width:52px;padding:0 13px}.wa svg{width:26px;height:26px}}
 @media print{.wa{display:none}}
+
+/* Gallery: griglia stabile, nessuno spostamento delle foto durante il caricamento */
+.masonry.gal{columns:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.gal .masonry__item{margin-bottom:0;aspect-ratio:4/3;background:#e8e2d6}
+.gal .masonry__item img{width:100%;height:100%;object-fit:cover}
+@media (max-width:1024px){.masonry.gal{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.masonry.gal{gap:10px}}
