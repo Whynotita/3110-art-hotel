@@ -539,3 +539,4 @@ body{counter-reset:sec}
 @media (max-width:520px){.masonry.gal{gap:10px}}
 
 .exp-sel{text-align:center;max-width:660px;margin:72px auto 40px}.exp-sel h3{font-size:1.6rem;margin:10px 0 12px}.exp--2{grid-template-columns:repeat(2,1fr)}.exp__d{display:block;margin-top:12px;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);font-weight:600}.exp-note{text-align:center;font-size:.82rem;margin-top:32px;opacity:.75}@media(max-width:700px){.exp--2{grid-template-columns:1fr}.exp-sel{margin-top:56px}}
+.center+.exp-sel,.shead+.exp-sel{margin-top:0}
