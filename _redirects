@@ -1,0 +1,21 @@
+# Vecchio sito WordPress -> nuovo sito (301)
+/camere/                          /camere.html                 301
+/hotel/                           /hotel.html                  301
+/dove-siamo/                      /location.html               301
+/esperienze/                      /esperienze.html             301
+/gallery/                         /gallery.html                301
+/en/                              /en/index.html               301
+/en/rooms/                        /en/camere.html              301
+/en/hotel/                        /en/hotel.html               301
+/en/location/                     /en/location.html            301
+/en/experiences/                  /en/esperienze.html          301
+/en/gallery/                      /en/gallery.html             301
+/privacy-cookies-policy/          https://www.iubenda.com/privacy-policy/97482714  301
+/en/privacy-cookies-policy/       https://www.iubenda.com/privacy-policy/97482714  301
+# Articoli del blog: la storia di Anna Maria Luisa va sulla pagina Note d'Arte, gli altri su Esperienze
+/esperienze/anna-maria-luisa-lultima-erede-alla-corte-dei-medici/   /note-darte-1.html   301
+/en/uncategorized/anna-maria-luisa-lultima-erede-alla-corte-dei-medici/   /en/note-darte-1.html   301
+/esperienze/*                     /esperienze.html             301
+/en/uncategorized/*               /en/esperienze.html          301
+# Tolto: pagine WordPress inesistenti
+/feed/                            /                            301
